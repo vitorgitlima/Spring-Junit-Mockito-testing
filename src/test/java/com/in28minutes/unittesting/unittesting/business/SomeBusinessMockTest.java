@@ -2,21 +2,23 @@ package com.in28minutes.unittesting.unittesting.business;
 
 import com.in28minutes.unittesting.unittesting.data.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.*;
+import org.mockito.*;
+import org.mockito.junit.jupiter.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
+@ExtendWith(MockitoExtension.class)
 public class SomeBusinessMockTest {
 
-    SomeBusinessImpl business = new SomeBusinessImpl();
+    @InjectMocks
+    SomeBusinessImpl business;
+    @Mock
     SomeDataService dataServiceMock = mock(SomeDataService.class);
 
-    @BeforeEach
-    public void before(){
-        business.setSomeDataService(dataServiceMock);
-    }
 
     @Test
     public void  calculateSumUsingDataService_basic() {
